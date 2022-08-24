@@ -6,19 +6,19 @@ import sympy as sym
 
 # Returns a phasor with a phase of 2pi / denominator
 # Ex: genericAlternator(3) = e^2πi / 3
-def genericAlternator(denominator):
+def rootOfUnity(denominator):
     return cmath.exp((math.tau * complex(0, 1)) / denominator)
 
-def genericAlternatorSymbolic(denominator):
+def rootOfUnitySymbolic(denominator):
     return sym.exp((sym.tau * sym.I) / denominator)
 
 
-def genericAlternatorPower(numerator, denominator):
+def rootOfUnityPower(numerator, denominator):
     return cmath.exp((math.tau * complex(0, 1) * numerator) / denominator)
 
 
 def genericAlternatorSeries(period, n):
-    sum = complex(0,0)
+    sum = complex(0,0)    
 
     for x in range(1, n + 1):        
 
@@ -26,9 +26,11 @@ def genericAlternatorSeries(period, n):
 
     return sum
 
+def extendedModFunction(x, modulo, precision):
+    print(x)
 
 
-output = genericAlternator(3)
+output = rootOfUnity(3)
 #print("Value: ", output)
 #print("Polar: ", cmath.polar(output))
 #print("Modulus: ", abs(output))
@@ -37,10 +39,10 @@ output = genericAlternator(3)
 
 
 for i in range(0, 7):
-    a = genericAlternatorPower(i,6)
+    a = rootOfUnityPower(i,6)
     print(math.atan2(a.imag, a.real))
 
 print("Space")
 
 for j in range(0,3):
-    print(genericAlternatorPower(j,3) * genericAlternatorPower(j,3) * genericAlternatorPower(j,3))
+    print(rootOfUnityPower(j,3) * rootOfUnityPower(j,3) * rootOfUnityPower(j,3))
