@@ -16,6 +16,12 @@ eq3 = Eq(6*x - 4*y - 9, 0)
 solution = solve((eq2,eq3), (x,y))
 print(solution)
 
+print('\nSum of two expressions')
+equ2 = 5*x + 5*y - 7
+equ3 = 6*x - 4*y - 9
+equ4 = equ2 + equ3
+print(equ4)
+
 print('\nSolve for roots of x**2 = 2')
 print(solve(x**2 - 2, x))
 

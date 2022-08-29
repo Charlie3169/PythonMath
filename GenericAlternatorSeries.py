@@ -29,6 +29,24 @@ def genericAlternatorSeries(period, n):
 def extendedModFunction(x, modulo, precision):
     print(x)
 
+def randomPolynomial(x):
+    print(x)
+
+def taylorSeries(function, x, a, depth):
+    #Needs a lot of work
+    sum = sym.Poly(0)
+    for k in range(1,depth):
+       sum += function.diff(x,k)*(x - a)**k / (math.factorial(k))
+    print(sum)
+
+def newtonsMethod(function, epsilon):
+    last = 0
+    diff = 0
+    while(diff > epsilon):
+        #Do newtons 
+        print("poop")
+    print(last)
+
 
 output = rootOfUnity(3)
 #print("Value: ", output)
