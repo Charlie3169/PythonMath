@@ -6,28 +6,31 @@ import sympy as sym
 
 # Returns a phasor with a phase of 2pi / denominator
 # Ex: genericAlternator(3) = e^2πi / 3
-def rootOfUnity(denominator):
+def rootOfUnity(denominator: int) -> complex:
     return cmath.exp((math.tau * complex(0, 1)) / denominator)
 
-def rootOfUnitySymbolic(denominator):
+def rootOfUnitySymbolic(denominator: int) -> sym.Symbol:
     return sym.exp((sym.tau * sym.I) / denominator)
 
 
-def rootOfUnityPower(numerator, denominator):
+def rootOfUnityPower(numerator: int, denominator: int) -> complex:
     return cmath.exp((math.tau * complex(0, 1) * numerator) / denominator)
 
 
 def genericAlternatorSeries(period, n):
     sum = complex(0,0)    
-
-    for x in range(1, n + 1):        
-
+    for x in range(1, n + 1):     
         sum += 1 / x        
 
     return sum
 
-def extendedModFunction(x, modulo, precision):
-    print(x)
+def fourierSeriesModFunction(x, modulo, precision):
+    sum = complex(0,0)
+    for n in range(1, precision):
+        currentTerm = rootOfUnityPower(x*n, modulo) / n        
+        sum += currentTerm
+
+    return (modulo / 2) - (modulo / math.pi) * sum.imag
 
 def randomPolynomial(x):
     print(x)
@@ -48,7 +51,7 @@ def newtonsMethod(function, epsilon):
     print(last)
 
 
-output = rootOfUnity(3)
+#output = rootOfUnity(3)
 #print("Value: ", output)
 #print("Polar: ", cmath.polar(output))
 #print("Modulus: ", abs(output))
@@ -56,11 +59,14 @@ output = rootOfUnity(3)
 #print("Argument: ", Fraction(arc) , "τ")
 
 
-for i in range(0, 7):
-    a = rootOfUnityPower(i,6)
-    print(math.atan2(a.imag, a.real))
+#for i in range(0, 7):
+#    a = rootOfUnityPower(i,6)
+#    print(math.atan2(a.imag, a.real))
 
-print("Space")
+#print("Space")
 
-for j in range(0,3):
-    print(rootOfUnityPower(j,3) * rootOfUnityPower(j,3) * rootOfUnityPower(j,3))
+#for j in range(0,3):
+#    print(rootOfUnityPower(j,3) * rootOfUnityPower(j,3) * rootOfUnityPower(j,3))
+
+
+print(fourierSeriesModFunction(10484124, 5300, 100000))

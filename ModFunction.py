@@ -1,8 +1,10 @@
 import cmath
 import math
+from RootsOfUnity import rootOfUnityPower
 
 # Program to calculate the modulus operator using mathmatical properties of complex numbers
 # Pretty useless but its a cool application of math
+
 # a mod b = t mod c
 # t: Value to be wrapped around circle
 # c: Circumference of a circle
@@ -17,9 +19,21 @@ def complexMod(t, c):
     # the numerator ratio of how far it has travelled around the circle    
     return round((c / cmath.tau) * (math.atan2(result.imag, result.real)))
 
-t = 10
-c = 6
 
-print("Modular result using complex circle: ", complexMod(t, c))
-print("Modular result using mod operator: ", t % c)
 
+# Approximates a mod b using a modified complex fourier series of a sawtooth wave
+# Matches the mod function when a mod b != 0, and is b/2 when a mod b == 0
+def fourierSeriesModFunction(x, modulo, precision):
+    sum = complex(0,0)
+    for n in range(1, precision):
+        currentTerm = rootOfUnityPower(x*n, modulo) / n        
+        sum += currentTerm
+
+    return (modulo / 2) - (modulo / math.pi) * sum.imag
+
+a = 111
+b = 6
+
+print("Modular result using complex circle: ", complexMod(a, b))
+print("Modular result using fourier series: ", fourierSeriesModFunction(a, b, 100000))
+print("Modular result using mod operator: ", a % b)
