@@ -31,8 +31,8 @@ def fourierSeriesModFunction(x, modulo, precision):
 
     return (modulo / 2) - (modulo / math.pi) * sum.imag
 
-a = 111
-b = 6
+a = 17
+b = 5
 
 print("Modular result using complex circle: ", complexMod(a, b))
 print("Modular result using fourier series: ", fourierSeriesModFunction(a, b, 100000))
