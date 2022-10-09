@@ -1,36 +1,47 @@
 import math
 import cmath
-from fractions import Fraction
 import sympy as sym
-
+from sympy import init_printing
+init_printing()
 
 # Returns a phasor with a phase of 2pi / denominator
 # Ex: genericAlternator(3) = e^2πi / 3
 def rootOfUnity(denominator: int) -> complex:
     return cmath.exp((math.tau * complex(0, 1)) / denominator)
 
+
+
 def rootOfUnitySymbolic(denominator: int) -> sym.Symbol:
-    return sym.exp((sym.tau * sym.I) / denominator)
+    return sym.exp((2 * sym.pi * sym.I) / denominator)
 
 
 def rootOfUnityPower(numerator: int, denominator: int) -> complex:
     return cmath.exp((math.tau * complex(0, 1) * numerator) / denominator)
 
+def rootOfUnityPowerSymbolic(numerator: int, denominator: int) -> sym.Symbol:
+    return sym.exp((2 * sym.pi * sym.I * numerator) / denominator)
 
-def genericAlternatorSeries(period, n):
+
+def rootOfUnityZetaSeries(nthRoot, s : complex, precision: int) -> complex:
     sum = complex(0,0)    
-    for x in range(1, n + 1):     
-        sum += 1 / x        
+    for n in range(1, precision + 1):     
+        sum +=  rootOfUnityPower(n, nthRoot) / (cmath.exp(s * cmath.log(n)))        
+    return sum
+
+def nthCyclicalAlternatorZetaSeries(precision: int):
+    sum = complex(0,0)    
+    for x in range(1, precision + 1):     
+        sum += 1 / (cmath.exp(s * cmath.log(x)))       
 
     return sum
 
-def fourierSeriesModFunction(x, modulo, precision):
-    sum = complex(0,0)
-    for n in range(1, precision):
-        currentTerm = rootOfUnityPower(x*n, modulo) / n        
-        sum += currentTerm
+    
 
-    return (modulo / 2) - (modulo / math.pi) * sum.imag
+
+
+
+
+
 
 def randomPolynomial(x):
     print(x)
@@ -51,13 +62,6 @@ def newtonsMethod(function, epsilon):
     print(last)
 
 
-#output = rootOfUnity(3)
-#print("Value: ", output)
-#print("Polar: ", cmath.polar(output))
-#print("Modulus: ", abs(output))
-#arc = (math.atan2(output.imag, output.real) / (2 * math.pi))
-#print("Argument: ", Fraction(arc) , "τ")
-
 
 #for i in range(0, 7):
 #    a = rootOfUnityPower(i,6)
@@ -69,4 +73,8 @@ def newtonsMethod(function, epsilon):
 #    print(rootOfUnityPower(j,3) * rootOfUnityPower(j,3) * rootOfUnityPower(j,3))
 
 
-print(fourierSeriesModFunction(10484124, 5300, 100000))
+#print(latex(rootOfUnityPowerSymbolic(5, 7)))
+print(rootOfUnityZetaSeries(1,2,10000))
+print(math.pi * math.pi / 6)
+print(rootOfUnityZetaSeries(2,1,10000))
+print(math.log(2))

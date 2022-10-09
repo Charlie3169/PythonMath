@@ -13,11 +13,15 @@ def complexMod(t, c):
 
     # e^(2pi * i) wraps around the circle once, so by scaling the 2pi by the the circumerence we can get a 1/c turn, 
     # which can then be scaled by t to any whole number ratio of the circumference
-    result = cmath.exp((cmath.tau / c) * complex(0,1) * t)
+    result = rootOfUnityPower(t, c)
+    
+    # This gets the angle of the result and converts it from atan2's range (-pi, pi) to (0, 2pi)
+    angle = math.atan2(result.imag, result.real)
+    if(angle < 0): angle += cmath.tau 
 
-    # Get the angle of the complex result and divide it by 2pi radians times the circumference to get 
-    # the numerator ratio of how far it has travelled around the circle    
-    return round((c / cmath.tau) * (math.atan2(result.imag, result.real)))
+    # Take the angle and divide it by 2pi radians times the circumference to get 
+    # the numerator ratio of how far it has travelled around the circle   
+    return (c / cmath.tau) * angle
 
 
 
@@ -31,8 +35,8 @@ def fourierSeriesModFunction(x, modulo, precision):
 
     return (modulo / 2) - (modulo / math.pi) * sum.imag
 
-a = 17
-b = 5
+a = 11312412
+b = 5500
 
 print("Modular result using complex circle: ", complexMod(a, b))
 print("Modular result using fourier series: ", fourierSeriesModFunction(a, b, 100000))

@@ -18,8 +18,7 @@ def isPrime(n):
     for i in range(2, n):
         if n % i == 0:            
             return False        
-    else:
-        return True
+    return True
 
 
 
@@ -36,27 +35,15 @@ def distinctPrimeFactorization(n):
 
 
 
-n = 452002
+n = 45200
 
 #primes = [piFunction(n)]
 
+#primes = piFunction(n)
+#print(primes)
+
+print(isPrime(104))
 
 
 
 
-
-
-
-start = timer()
-
-
-
-end = timer()
-print("Time1: ", end - start)
-
-start2 = timer()
-
-primes = piFunction(n)
-
-end2 = timer()
-print("Time2: ", end2 - start2)
