@@ -1,10 +1,6 @@
 import cmath
 from timeit import default_timer as timer
 
-
-
-
-
 def piFunction(n):
     primes = []       
     for i in range(2, n):
