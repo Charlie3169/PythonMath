@@ -28,7 +28,7 @@ def rootOfUnityZetaSeries(nthRoot, s : complex, precision: int) -> complex:
         sum +=  rootOfUnityPower(n, nthRoot) / (cmath.exp(s * cmath.log(n)))        
     return sum
 
-def nthCyclicalAlternatorZetaSeries(precision: int):
+# def nthCyclicalAlternatorZetaSeries(precision: int):
     sum = complex(0,0)    
     for x in range(1, precision + 1):     
         sum += 1 / (cmath.exp(s * cmath.log(x)))       
